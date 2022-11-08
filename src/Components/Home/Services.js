@@ -1,10 +1,9 @@
-
-
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Services = ({service}) => {
-    
+const Services = ({ service }) => {
+  console.log(service);
+
   return (
     <div>
       <div className="w-full max-w-xs overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
@@ -13,15 +12,26 @@ const Services = ({service}) => {
           src={service?.picture}
           alt="avatar"
         />
-        <div className="py-5 text-center">
-          <Link
-            className="block text-2xl font-bold text-gray-800 dark:text-white"
-          >
+        <div className="py-5 px-5  text-gray-700">
+          <Link className="block text-2xl font-bold text-gray-800 dark:text-white">
             {service?.name}
           </Link>
-          <span className="text-sm text-gray-700 dark:text-gray-200">
+          <h4 className="text-xl text-gray-700 dark:text-gray-200 font-bold">
             {service?.price}
-          </span>
+          </h4>
+          <span>Ratings:{service.ratings}</span>
+          <p>
+            <span className="font-semibold">Description:</span>
+            {service?.about.length > 100
+              ? service?.about.slice(0, 100)
+              : ""}{" "}
+            .....
+          </p>
+          <div className="my-4">
+            <button className="px-8 py-3 font-semibold rounded border border-sky-700">
+              <Link to={`/serviceDetails/${service._id}`}>View Details</Link>
+            </button>
+          </div>
         </div>
       </div>
     </div>

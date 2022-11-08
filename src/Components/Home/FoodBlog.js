@@ -14,9 +14,7 @@ const FoodBlog = () => {
           </div>
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             <article className="flex flex-col dark:bg-gray-900">
-              <Link
-               
-              >
+              <Link>
                 <img
                   alt=""
                   className="object-cover w-full h-52 dark:bg-gray-500"
@@ -24,16 +22,12 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link
-             
-                ></Link>
-                <Link
-                  className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
-                >
+                <Link></Link>
+                <Link className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400">
                   Convenire
                 </Link>
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
-                Cooking Perfect Fried Rice in minutes
+                  Cooking Perfect Fried Rice in minutes
                 </h3>
                 <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
                   <span>June 1, 2020</span>
@@ -42,9 +36,7 @@ const FoodBlog = () => {
               </div>
             </article>
             <article className="flex flex-col dark:bg-gray-900">
-              <Link
-                aria-label="Te nulla oportere reprimique his dolorum"
-              >
+              <Link>
                 <img
                   alt=""
                   className="object-cover w-full h-52 dark:bg-gray-500"
@@ -52,15 +44,8 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link
-                 
-                  href="#"
-                  
-                ></Link>
-                <Link
-                
-                  className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
-                >
+                <Link href="#"></Link>
+                <Link className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400">
                   Convenire
                 </Link>
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
@@ -73,11 +58,7 @@ const FoodBlog = () => {
               </div>
             </article>
             <article className="flex flex-col dark:bg-gray-900">
-              <Link
-                rel="noopener noreferrer"
-                href="#"
-                aria-label="Te nulla oportere reprimique his dolorum"
-              >
+              <Link href="#">
                 <img
                   alt=""
                   className="object-cover w-full h-52 dark:bg-gray-500"
@@ -85,20 +66,15 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
+                <Link href="#"></Link>
                 <Link
-                 
-                  href="#"
-                  
-                ></Link>
-                <Link
-                  
                   href="#"
                   className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
                 >
                   Convenire
                 </Link>
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
-                How to check steak if it is tender or not.
+                  How to check steak if it is tender or not.
                 </h3>
                 <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
                   <span>June 3, 2020</span>
@@ -107,11 +83,7 @@ const FoodBlog = () => {
               </div>
             </article>
             <article className="flex flex-col dark:bg-gray-900">
-              <Link
-                rel="noopener noreferrer"
-                href="#"
-                aria-label="Te nulla oportere reprimique his dolorum"
-              >
+              <Link href="#">
                 <img
                   alt=""
                   className="object-cover w-full h-52 dark:bg-gray-500"
@@ -119,20 +91,15 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
+                <Link href="#"></Link>
                 <Link
-                  rel="noopener noreferrer"
-                  href="#"
-                  aria-label="Te nulla oportere reprimique his dolorum"
-                ></Link>
-                <Link
-                  rel="noopener noreferrer"
                   href="#"
                   className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
                 >
                   Convenire
                 </Link>
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
-                Seaseme and black seed Flavored Bun Rocks.
+                  Seaseme and black seed Flavored Bun Rocks.
                 </h3>
                 <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs dark:text-gray-400">
                   <span>June 4, 2020</span>
