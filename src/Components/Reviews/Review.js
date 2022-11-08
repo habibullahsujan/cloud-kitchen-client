@@ -1,11 +1,27 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+
 import Slider from "react-slick";
 import { AuthContext } from "../../Context/UserContext";
 import SingleReview from "./SingleReview";
 
-const Review = ({ reviews }) => {
+const Review = ({ reviews,serviceNo }) => {
   const { user } = useContext(AuthContext);
+
+
+  useEffect(()=>{
+
+    fetch(`http://localhost:5000/serviceReview/${serviceNo}`,{
+
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+    })
+
+
+  },[serviceNo])
+
+
 
   const settings = {
     dots: true,
@@ -22,25 +38,7 @@ const Review = ({ reviews }) => {
   };
   return (
     <div className="lg:w-[85%] mx-auto my-10 text-black">
-      <div className="flex justify-end">
-        {user?.uid ? (
-          <Link
-            to={"/addReview"}
-            className="px-4 py-2 border border-sky-700 bg-sky-600 text-white font-semibold"
-          >
-            Add Review
-          </Link>
-        ) : (
-          <>
-            <Link
-              className="px-4 py-2 border border-sky-700 bg-sky-600 text-white font-semibold"
-              to={"/login"}
-            >
-              Want to Add review? Login First
-            </Link>
-          </>
-        )}
-      </div>
+    
 
       <Slider {...settings}>
         {reviews.map((review) => (

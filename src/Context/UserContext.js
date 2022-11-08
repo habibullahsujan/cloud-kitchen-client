@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -18,7 +18,8 @@ const UserContext = ({ children }) => {
   
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
-  const [loader, setLoader]=useState(true)
+  const [loader, setLoader]=useState(true);
+  const [service, setService]=useState({})
 
   const createUserWithEmail = (email, password) => {
     setLoader(true)
@@ -62,7 +63,10 @@ const UserContext = ({ children }) => {
     updateUsersProfile,
     signInUsingGoogle,
     logOut,
-    loader
+    loader,
+    service,
+    setService,
+
   };
 
   return (

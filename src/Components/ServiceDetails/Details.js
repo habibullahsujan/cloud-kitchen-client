@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useContext} from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import "react-photo-view/dist/react-photo-view.css";
 import Review from "../Reviews/Review";
+import { AuthContext } from "../../Context/UserContext";
 
 const Details = () => {
   const serviceDetails = useLoaderData();
- 
-  const reviews=serviceDetails.reviews
+  const { user, setService,  } = useContext(AuthContext);
+  
 
+  const reviews = serviceDetails.reviews;
+
+  const handleSetServiceId=()=>{
+    setService(serviceDetails.serviceNo)
+
+  }
   return (
     <div>
       <div className="flex justify-center my-16">
@@ -101,8 +108,28 @@ const Details = () => {
           </div>
         </div>
       </div>
+      <div className="flex justify-end">
+        {user? (
+          <Link
+            to={`/addReview/${serviceDetails.serviceNo}`}
+            onClick={handleSetServiceId}
+            className="px-4 py-2 border border-sky-700 bg-sky-600 text-white font-semibold"
+          >
+            Add Review
+          </Link>
+        ) : (
+          <>
+            <Link
+              className="px-4 py-2 border border-sky-700 bg-sky-600 text-white font-semibold"
+              to={"/login"}
+            >
+              Want to Add review? Login First
+            </Link>
+          </>
+        )}
+      </div>
       <div>
-        <Review reviews={reviews} />
+        <Review reviews={reviews} serviceNo={serviceDetails.serviceNo} />
       </div>
     </div>
   );

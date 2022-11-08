@@ -36,7 +36,7 @@ const Home = () => {
       </div>
       <div className="grid lg:grid-cols-3 grid-cols-1 mx-auto lg:w-[85%] gap-2">
         {services.map((service) => (
-          <Services key={service._id} service={service} />
+          <Services key={service._id} service={service} serviceNo={service.serviceNo} />
         ))}
       </div>
       <div className="flex justify-center my-10">
