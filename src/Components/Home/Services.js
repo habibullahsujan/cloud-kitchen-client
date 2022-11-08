@@ -13,11 +13,9 @@ const Services = ({service}) => {
           src={service?.picture}
           alt="avatar"
         />
-
         <div className="py-5 text-center">
           <Link
             className="block text-2xl font-bold text-gray-800 dark:text-white"
-           
           >
             {service?.name}
           </Link>
