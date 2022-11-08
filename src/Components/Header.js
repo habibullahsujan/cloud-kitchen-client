@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,7 +27,7 @@ const Header = () => {
                 title="Our product"
                 class="font-medium tracking-wide transition-colors duration-200 hover:text-teal-accent-400"
               >
-                Product
+                Products
               </a>
             </li>
             <li>
@@ -56,18 +57,29 @@ const Header = () => {
                 title="About us"
                 class="font-medium tracking-wide transition-colors duration-200 hover:text-teal-accent-400"
               >
-                About us
+                Blog
               </a>
             </li>
             <li>
-              <a
-                href="/"
+              <Link
+              to={'/signUp'}
+                
                 class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                 aria-label="Sign up"
                 title="Sign up"
               >
                 Sign up
-              </a>
+              </Link>
+            </li>
+            <li>
+              <Link
+              to={'/login'}
+                class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                aria-label="Sign up"
+                title="Sign up"
+              >
+                Login
+              </Link>
             </li>
           </ul>
           <div class="lg:hidden">

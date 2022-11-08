@@ -28,7 +28,7 @@ const Services = ({ service }) => {
             .....
           </p>
           <div className="my-4">
-            <button className="px-8 py-3 font-semibold rounded border border-sky-700">
+            <button className=" text-white px-8 py-3 font-semibold rounded border border-sky-700 w-full transition ease-in-out delay-150 bg-sky-700 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ">
               <Link to={`/serviceDetails/${service._id}`}>View Details</Link>
             </button>
           </div>
