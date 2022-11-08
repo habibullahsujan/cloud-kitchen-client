@@ -1,28 +1,32 @@
 import React from "react";
+import { PhotoProvider, PhotoView } from "react-photo-view";
 import { useLoaderData } from "react-router-dom";
+import 'react-photo-view/dist/react-photo-view.css';
 
 const Details = () => {
   const serviceDetails = useLoaderData();
-  console.log(serviceDetails);
+
   return (
     <div className="flex justify-center my-16">
       <div className="flex flex-col max-w-lg p-6 space-y-6 overflow-hidden rounded-lg shadow-md bg-yellow-100 text-black">
-        <div>
-          <img
-            src={serviceDetails?.picture}
-            alt=""
-            className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500"
-          />
-          <h2 className="mb-1 text-4xl font-bold">
-            {serviceDetails?.name}
-          </h2>
+        <div className="">
+          <PhotoProvider>
+            <div className="foo cursor-pointer">
+              <PhotoView src={serviceDetails?.picture}>
+                <img className="object-cover w-full mb-4 h-60 sm:h-96 dark:bg-gray-500" src={serviceDetails?.picture} alt="" />
+              </PhotoView>
+            </div>
+          </PhotoProvider>
+     
+          <h2 className="mb-1 text-4xl font-bold">{serviceDetails?.name}</h2>
           <h4 className="text-xl text-gray-700 dark:text-gray-200 font-bold">
             {serviceDetails?.price}
           </h4>
-          <h5><span className="font-semibold text-lg">Ratings:</span>{serviceDetails?.ratings}</h5>
-          <p className="text-sm dark:text-gray-400">
-           {serviceDetails?.about}
-          </p>
+          <h5>
+            <span className="font-semibold text-lg">Ratings:</span>
+            {serviceDetails?.ratings}
+          </h5>
+          <p className="text-sm dark:text-gray-400">{serviceDetails?.about}</p>
         </div>
         <div className="flex flex-wrap justify-between">
           <div className="space-x-2">
