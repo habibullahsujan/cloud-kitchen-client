@@ -1,42 +1,49 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
 
 const AddReview = () => {
-  const {user, service,ServiceId}=useContext(AuthContext);
-  const [comment, setComment]=useState('')
+  const { user } = useContext(AuthContext);
+  const [comment, setComment] = useState("");
+  const service = useLoaderData();
+  console.log(service.serviceNo);
 
-  const getUserComment=(comment)=>{
+  const getUserComment = (comment) => {
     setComment(comment);
+  };
 
+  const time = new Date();
+  const date = time.getDate();
+  const month = time.getMonth();
+  const year = time.getFullYear();
+  const fullTime = { date: date, month: month, year: year };
 
-  }
-  const handleAddReview=()=>{
-  console.log(service, ServiceId);
-    const userReview={
-      userName:user?.displayName,
-      userEmail:user?.email,
-      userImg:user?.photoURL,
-      userReview:comment,
-      userRating:3,
-      serviceNo:service,
+  const handleAddReview = () => {
+    const userReview = {
+      userName: user?.displayName,
+      userEmail: user?.email,
+      userImg: user?.photoURL,
+      userReview: comment,
+      userRating: 3,
+      serviceNo: service.serviceNo,
+      reviewTime: fullTime,
     };
-    fetch('http://localhost:5000/addReview',{
-      method:'POST',
-      headers:{
-        'content-type':'application/json'
+    fetch("http://localhost:5000/addReview", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
       },
-      body:JSON.stringify(userReview)
-
+      body: JSON.stringify(userReview),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data)
-    })
-
-    
-
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.acknowledged){
+          toast.success('Thanks For Your Feedback.')
+        }
+        // console.log(data);
+      });
+  };
   return (
     <div>
       <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 bg-black text-white border border-sky-100 mx-auto my-10">
@@ -121,23 +128,21 @@ const AddReview = () => {
           </div>
           <div className="flex flex-col w-full">
             <textarea
-            onChange={(e)=>getUserComment(e.target.value)}
+              onChange={(e) => getUserComment(e.target.value)}
               rows="3"
               placeholder="Message..."
               className="p-4 rounded-md resize-none text-black"
             ></textarea>
-            <button onClick={handleAddReview} className=" text-white my-10 px-8 py-3 font-semibold rounded border border-sky-700 w-full transition ease-in-out delay-150 bg-sky-700 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 ">
+            <button
+              onClick={handleAddReview}
+              className=" text-white my-10 px-8 py-3 font-semibold rounded border border-sky-700 w-full transition ease-in-out delay-150 bg-sky-700 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300 "
+            >
               Add Review
             </button>
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <Link
-           
-            className="text-sm dark:text-gray-400"
-          >
-            Maybe later
-          </Link>
+          <Link className="text-sm dark:text-gray-400">Maybe later</Link>
         </div>
       </div>
     </div>

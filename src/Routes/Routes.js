@@ -33,23 +33,21 @@ export const routes = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`http://localhost:5000/serviceDetails/${params.id}`),
       },
-      {
-        path: "/addReview",
-        element: (
-          <PrivateRoute>
-            <AddReview />
-          </PrivateRoute>
-        ),
-      },
-      { path: "/userReview", element: <UserReview /> },
+
+      { path: "/userReview", element: <PrivateRoute><UserReview /></PrivateRoute> },
       {
         path: "/serviceReview",
         element: <SingleReview />,
       },
       {
         path: "/addReview/:id",
-        element: <AddReview />,
-        loader: ({ params }) => fetch(`http://localhost:5000/service/${params.id}`),
+        element: (
+          <PrivateRoute>
+            <AddReview />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/service/${params.id}`),
       },
     ],
   },

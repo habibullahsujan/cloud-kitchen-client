@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { AuthContext } from "../../Context/UserContext";
 
 const UserReview = () => {
+  const {user}=useContext(AuthContext);
+
+  useEffect(()=>{
+
+
+    fetch(`http://localhost:5000/userReview?email=${user?.email}`)
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+    })
+
+
+  },[user?.email])
+
+
+
   return (
     <div>
       <div className="container p-2 mx-auto sm:p-4 dark:text-gray-100 my-10">

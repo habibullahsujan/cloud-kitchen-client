@@ -1,27 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Slider from "react-slick";
-import { AuthContext } from "../../Context/UserContext";
+
 import SingleReview from "./SingleReview";
 
-const Review = ({ reviews,serviceNo }) => {
-  const { user } = useContext(AuthContext);
+const Review = ({ serviceNo }) => {
+  const [reviews, setReviews] = useState([]);
 
-
-  useEffect(()=>{
-
-    fetch(`http://localhost:5000/serviceReview/${serviceNo}`,{
-
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data)
-    })
-
-
-  },[serviceNo])
-
-
+  useEffect(() => {
+    fetch(`http://localhost:5000/serviceReview/${serviceNo}`, {})
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setReviews(data);
+      });
+  }, [serviceNo]);
 
   const settings = {
     dots: true,
@@ -38,8 +31,9 @@ const Review = ({ reviews,serviceNo }) => {
   };
   return (
     <div className="lg:w-[85%] mx-auto my-10 text-black">
-    
-
+      <div>
+        <h3 className="font-bold text-white text-4xl text-center">{reviews.length < 1 && "This item has no review."}</h3>
+      </div>
       <Slider {...settings}>
         {reviews.map((review) => (
           <SingleReview review={review} key={review._id} />

@@ -38,14 +38,14 @@ const Header = () => {
           {user?.uid ? (
             <>
               <li>
-                <a
-                  href="/"
+                <Link
+                to={'/userReview'}
                   aria-label="Our product"
-                  title="Our product"
+                  title="My Review"
                   className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
                   My Review
-                </a>
+                </Link>
               </li>
               <li>
                 <a
