@@ -6,6 +6,8 @@ import Review from "../Reviews/Review";
 
 const Details = () => {
   const serviceDetails = useLoaderData();
+ 
+  const reviews=serviceDetails.reviews
 
   return (
     <div>
@@ -100,7 +102,7 @@ const Details = () => {
         </div>
       </div>
       <div>
-        <Review />
+        <Review reviews={reviews} />
       </div>
     </div>
   );
