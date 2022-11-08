@@ -32,7 +32,7 @@ const Home = () => {
         </div>
       </div>
       <div className="my-20">
-        <h1 className="font-bold text-4xl">Services</h1>
+        <h1 className="font-bold text-4xl text-center">Services</h1>
       </div>
       <div className="grid lg:grid-cols-3 grid-cols-1 mx-auto lg:w-[85%] gap-2">
         {services.map((service) => (
