@@ -4,7 +4,7 @@ const SingleReview = ({ review }) => {
   const { userImg, userName, userRating, userReview, reviewTime } = review;
 
   return (
-    <div className="mx-4">
+    <div className="mx-4 flex justify-center">
       <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md border border-sky-700 bg-gray-700 text-white">
         <div className="flex justify-between">
         <div className="flex justify-between p-4">

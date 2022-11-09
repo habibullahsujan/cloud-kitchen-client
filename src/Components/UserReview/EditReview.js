@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
 
 const EditReview = () => {
   const review = useLoaderData();
   const { user } = useContext(AuthContext);
   const [rating, setRating] = useState(0);
+  const navigate=useNavigate()
 
   const handleGetUpdatedRating = (updatedRating) => {
     setRating(updatedRating);
@@ -21,7 +23,6 @@ const EditReview = () => {
       comment: updatedComment,
       updatedRating: rating,
     };
-
     fetch(`http://localhost:5000/editReview/${review._id}`, {
       method: "PUT",
       headers: {
@@ -30,7 +31,14 @@ const EditReview = () => {
       body: JSON.stringify(updatedReview),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if(data.acknowledged){
+            toast.success('Your review updated.');
+            form.reset();
+            navigate('/userReview')
+
+        }
+      });
   };
   return (
     <div className=" p-5 my-20">

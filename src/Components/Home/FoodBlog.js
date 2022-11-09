@@ -8,9 +8,7 @@ const FoodBlog = () => {
         <div className="container p-6 mx-auto space-y-8">
           <div className="space-y-2 text-center">
             <h2 className="text-5xl font-bold">Latest From Our Blog</h2>
-            <p className="font-serif text-sm dark:text-gray-400">
-              Qualisque erroribus usu at, duo te agam soluta mucius.
-            </p>
+         
           </div>
           <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
             <article className="flex flex-col dark:bg-gray-900">
@@ -22,10 +20,7 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link></Link>
-                <Link className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400">
-                  Convenire
-                </Link>
+               
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
                   Cooking Perfect Fried Rice in minutes
                 </h3>
@@ -44,10 +39,7 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link href="#"></Link>
-                <Link className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400">
-                  Convenire
-                </Link>
+               
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
                   TSecret of making Heart Shaped eggs.
                 </h3>
@@ -66,13 +58,7 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link href="#"></Link>
-                <Link
-                  href="#"
-                  className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
-                >
-                  Convenire
-                </Link>
+             
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
                   How to check steak if it is tender or not.
                 </h3>
@@ -91,13 +77,8 @@ const FoodBlog = () => {
                 />
               </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link href="#"></Link>
-                <Link
-                  href="#"
-                  className="text-xs tracking-wider uppercase hover:underline dark:text-violet-400"
-                >
-                  Convenire
-                </Link>
+      
+              
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
                   Seaseme and black seed Flavored Bun Rocks.
                 </h3>

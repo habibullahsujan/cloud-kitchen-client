@@ -26,36 +26,34 @@ const Header = () => {
         </Link>
         <ul className=" items-center hidden space-x-8 lg:flex">
           <li>
-            <a
-              href="/"
-              aria-label="Our product"
-              title="Our product"
+            <Link to={'/blog'}
+              aria-label="Blog"
+              title="Blog"
               className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Blog
-            </a>
+            </Link>
           </li>
           {user?.uid ? (
             <>
               <li>
                 <Link
                 to={'/userReview'}
-                  aria-label="Our product"
-                  title="My Review"
+               
+                  title="User Review"
                   className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
                   My Review
                 </Link>
               </li>
               <li>
-                <a
-                  href="/"
-                  aria-label="Our product"
-                  title="Our product"
+                <Link
+                to={'/AddService'}
+                  title="Add Services"
                   className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
                 >
                   Add Service
-                </a>
+                </Link>
               </li>
             </>
           ) : (

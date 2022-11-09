@@ -38,7 +38,7 @@ const UserReview = () => {
   return (
     <div>
       {reviews.length < 1 ? (
-        <div>
+        <div className="h-[100vh] flex justify-center items-center">
           <h3 className="font-bold text-4xl text-center text-white">
             You have zero reviews.
           </h3>
