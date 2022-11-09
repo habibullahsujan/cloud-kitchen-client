@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
 
@@ -71,9 +72,9 @@ const UserReview = () => {
                     {review?.reviewTime?.year}
                   </td>
                   <td className="p-3">
-                    <button className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1">
+                    <Link to={`/editReview/${review?._id}`} className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1">
                       Edit
-                    </button>
+                    </Link>
                   </td>
                   <td className="p-3">
                     <button

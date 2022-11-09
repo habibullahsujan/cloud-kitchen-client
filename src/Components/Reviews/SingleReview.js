@@ -1,11 +1,12 @@
 import React from "react";
 
 const SingleReview = ({ review }) => {
-  const { userImg, userName, userRating, userReview } = review;
+  const { userImg, userName, userRating, userReview, reviewTime } = review;
 
   return (
     <div className="mx-4">
-      <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md border border-sky-700 bg-white">
+      <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md border border-sky-700 bg-gray-700 text-white">
+        <div className="flex justify-between">
         <div className="flex justify-between p-4">
           <div className="flex space-x-4">
             <div>
@@ -17,11 +18,11 @@ const SingleReview = ({ review }) => {
             </div>
             <div>
               <h4 className="font-bold">{userName}</h4>
-              <span className="text-xs dark:text-gray-400">2 days ago</span>
+              <span className="text-xs dark:text-gray-400">{reviewTime.date} - {reviewTime.month} - {reviewTime.year}</span>
             </div>
           </div>
         </div>
-        <div className="flex items-center space-x-2 dark:text-yellow-500">
+        <div className="flex items-center space-x-2 text-yellow-500">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
@@ -31,6 +32,8 @@ const SingleReview = ({ review }) => {
           </svg>
           <span className="text-xl font-bold">{userRating}</span>
         </div>
+        </div>
+ 
         <div className="p-4 space-y-2 text-sm dark:text-gray-400">
           <p>{userReview}</p>
         </div>

@@ -6,6 +6,7 @@ import AddReview from "../Components/Reviews/AddReview";
 import SingleReview from "../Components/Reviews/SingleReview";
 import Details from "../Components/ServiceDetails/Details";
 import SignUp from "../Components/SignUp";
+import EditReview from "../Components/UserReview/EditReview";
 import UserReview from "../Components/UserReview/UserReview";
 import Main from "../Layout/Main";
 import PrivateRoute from "./PrivateRoute";
@@ -34,7 +35,14 @@ export const routes = createBrowserRouter([
           fetch(`http://localhost:5000/serviceDetails/${params.id}`),
       },
 
-      { path: "/userReview", element: <PrivateRoute><UserReview /></PrivateRoute> },
+      {
+        path: "/userReview",
+        element: (
+          <PrivateRoute>
+            <UserReview />
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/serviceReview",
         element: <SingleReview />,
@@ -48,6 +56,12 @@ export const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/service/${params.id}`),
+      },
+      {
+        path: "/editReview/:id",
+        element: <EditReview />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/review/${params.id}`),
       },
     ],
   },

@@ -49,6 +49,11 @@ const AddReview = () => {
       });
   };
 
+  const handleLaterBtn=()=>{
+    navigate('/')
+
+  }
+
   return (
     <div>
       <div className="flex flex-col max-w-xl p-8 shadow-sm rounded-xl lg:p-12 bg-black text-white border border-sky-100 mx-auto my-10">
@@ -87,7 +92,8 @@ const AddReview = () => {
           </div>
         </div>
         <div className="flex items-center justify-center">
-          <Link className="text-sm dark:text-gray-400">Maybe later</Link>
+          
+          <button onClick={handleLaterBtn} className="text-sm dark:text-gray-400">Maybe later</button>
         </div>
       </div>
     </div>

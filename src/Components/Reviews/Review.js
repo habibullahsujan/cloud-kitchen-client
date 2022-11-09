@@ -11,7 +11,7 @@ const Review = ({ serviceNo }) => {
     fetch(`http://localhost:5000/serviceReview/${serviceNo}`, {})
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+    
         setReviews(data);
       });
   }, [serviceNo]);
@@ -22,11 +22,11 @@ const Review = ({ serviceNo }) => {
     centerMode: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     centerPadding: "60px",
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 3000,
     cssEase: "linear",
   };
   return (
