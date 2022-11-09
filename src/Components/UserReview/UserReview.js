@@ -2,14 +2,25 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
+import useTitle from "../../Hooks/useTitle";
+
+import { Vortex } from "react-loader-spinner";
 
 const UserReview = () => {
-  const { user } = useContext(AuthContext);
+  useTitle("User Review");
+  const { user, logOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/userReview?email=${user?.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/userReview?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("userToken")}`,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json()
+      })
       .then((data) => {
         setReviews(data);
       });
@@ -35,15 +46,23 @@ const UserReview = () => {
         });
     }
   };
+
+  if (!reviews) {
+    <div className="flex justify-center items-center h-[100vh]">
+      <Vortex
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="vortex-loading"
+        wrapperStyle={{}}
+        wrapperClass="vortex-wrapper"
+        colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+      />
+    </div>;
+  }
   return (
     <div>
-      {reviews.length < 1 ? (
-        <div className="h-[100vh] flex justify-center items-center">
-          <h3 className="font-bold text-4xl text-center text-white">
-            You have zero reviews.
-          </h3>
-        </div>
-      ) : (
+      {reviews?.length ? (
         <div className="container p-2 mx-auto sm:p-4 my-10">
           <h2 className="mb-4 text-2xl font-semibold leading-tight">
             Your All Time Review
@@ -72,7 +91,10 @@ const UserReview = () => {
                     {review?.reviewTime?.year}
                   </td>
                   <td className="p-3">
-                    <Link to={`/editReview/${review?._id}`} className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1">
+                    <Link
+                      to={`/editReview/${review?._id}`}
+                      className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1"
+                    >
                       Edit
                     </Link>
                   </td>
@@ -88,6 +110,12 @@ const UserReview = () => {
               ))}
             </table>
           </div>
+        </div>
+      ) : (
+        <div className="h-[100vh] flex justify-center items-center">
+          <h3 className="font-bold text-4xl text-center text-white">
+            You have zero reviews.
+          </h3>
         </div>
       )}
     </div>

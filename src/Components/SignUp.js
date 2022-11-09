@@ -1,10 +1,17 @@
 import React, { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
+import useTitle from "../Hooks/useTitle";
 
 const SignUp = () => {
+
+  useTitle('Sign Up')
   const { createUserWithEmail, updateUsersProfile } = useContext(AuthContext);
 
+  const location=useLocation();
+  const navigate=useNavigate();
+  const  from = location.state?.from?.pathname || "/";
   const handleSignUpUser = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -34,6 +41,7 @@ const SignUp = () => {
         updateUsersProfile(profile)
           .then(() => {
             toast.success("Profile Updated.");
+            navigate(from, { replace: true });
           })
           .catch((error) => console.error(error));
       })

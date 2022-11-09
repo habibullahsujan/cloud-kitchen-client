@@ -1,6 +1,7 @@
 import React from "react";
 
 const About = () => {
+  
   return (
     <div>
       <section className="body-font bg-white text-black">

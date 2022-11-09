@@ -72,12 +72,12 @@ export const routes = createBrowserRouter([
       {
         path: "/AddService",
         element: (
+         
           <PrivateRoute>
-            <AddService />
+             <AddService />
           </PrivateRoute>
+          
         ),
-        loader: ({ params }) =>
-        fetch('http://localhost:5000/addService'),
       },
       {
         path: "/blog",

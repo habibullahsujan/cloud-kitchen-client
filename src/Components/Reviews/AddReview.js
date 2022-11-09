@@ -2,8 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
+import useTitle from "../../Hooks/useTitle";
 
 const AddReview = () => {
+
+  useTitle('Add Review');
+  
   const { user } = useContext(AuthContext);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);

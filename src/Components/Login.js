@@ -2,11 +2,18 @@ import React, { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
+import useTitle from "../Hooks/useTitle";
+import { jwtToken } from "../Utilities/jwtToken";
 
 const Login = () => {
+  useTitle("Login");
   const { signInUser, signInUsingGoogle } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
 
+  const from = location.state?.from?.pathname || "/";
+  console.log(from);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -18,10 +25,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        jwtToken(user)
+        navigate(from, { replace: true });
         toast.success("Login Success");
-        
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error);
+        console.log(error);
+      });
   };
 
   const handleLoginWithGoogle = () => {
@@ -30,7 +41,11 @@ const Login = () => {
         const user = result.user;
         console.log(user);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        toast.error(error);
+        navigate(from, { replace: true });
+        console.error(error)
+      });
   };
   return (
     <div className="my-10">
@@ -41,7 +56,7 @@ const Login = () => {
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
           <div className="space-y-1 text-sm">
-            <label for="email" className="block dark:text-gray-400">
+            <label htmlFor="email" className="block dark:text-gray-400">
               Email
             </label>
             <input
@@ -53,7 +68,7 @@ const Login = () => {
             />
           </div>
           <div className="space-y-1 text-sm">
-            <label for="password" className="block dark:text-gray-400">
+            <label htmlFor="password" className="block dark:text-gray-400">
               Password
             </label>
             <input
@@ -96,7 +111,10 @@ const Login = () => {
             </svg>
           </button>
 
-          <button aria-label="Log in with GitHub" className="p-3 rounded-sm border border-sky-800 text-gray-700">
+          <button
+            aria-label="Log in with GitHub"
+            className="p-3 rounded-sm border border-sky-800 text-gray-700"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 32 32"

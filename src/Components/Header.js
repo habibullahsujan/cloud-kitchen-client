@@ -6,12 +6,12 @@ import { AuthContext } from "../Context/UserContext";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
 
   const handleLogOut = () => {
     logOut()
       .then(() => {
         toast.success("Log Out Successful.");
+        localStorage.removeItem('userToken')
       })
       .catch((error) => console.error(error));
   };

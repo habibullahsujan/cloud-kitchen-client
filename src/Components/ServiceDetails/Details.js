@@ -4,8 +4,11 @@ import { Link, useLoaderData } from "react-router-dom";
 import "react-photo-view/dist/react-photo-view.css";
 import Review from "../Reviews/Review";
 import { AuthContext } from "../../Context/UserContext";
+import useTitle from "../../Hooks/useTitle";
 
 const Details = () => {
+
+  useTitle('Service Details')
   const serviceDetails = useLoaderData();
   const { user, setService,  } = useContext(AuthContext);
   
