@@ -25,9 +25,12 @@ const Home = () => {
               women face higher conduct standards especially in the workplace.
               That's why it's crucial that, as women.{" "}
             </p>
-            <button className="border border-sky-600 px-4 py-2 my-4 font-semibold">
+            <div className="my-8">
+            <Link to={'/allServices'} className="border border-sky-600 px-4 py-2 my-4 font-semibold">
               Check Our Menu
-            </button>
+            </Link>
+            </div>
+       
           </div>
         </div>
       </div>
