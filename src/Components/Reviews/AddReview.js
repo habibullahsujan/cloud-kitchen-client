@@ -9,7 +9,7 @@ const AddReview = () => {
   const [rating, setRating] = useState(0);
   const service = useLoaderData();
   const navigate = useNavigate();
-  console.log(service.serviceNo);
+
 
   const getUserComment = (comment) => {
     setComment(comment);
@@ -28,8 +28,10 @@ const AddReview = () => {
       userImg: user?.photoURL,
       userReview: comment,
       userRating: rating,
-      serviceNo: service.serviceNo,
+      serviceNo: service?.serviceNo,
+      serviceName:service?.name,
       reviewTime: fullTime,
+
     };
     fetch("http://localhost:5000/addReview", {
       method: "POST",
