@@ -1,18 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Vortex } from "react-loader-spinner";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../Context/UserContext";
 import useTitle from "../Hooks/useTitle";
+import { jwtToken } from "../Utilities/jwtToken";
 
 const SignUp = () => {
-
-  useTitle('Sign Up')
+  useTitle("Sign Up");
   const { createUserWithEmail, updateUsersProfile } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
+  const [loading, setLoading] = useState(false);
 
-  const location=useLocation();
-  const navigate=useNavigate();
-  const  from = location.state?.from?.pathname || "/";
   const handleSignUpUser = (e) => {
+    setLoading(true);
     e.preventDefault();
     const form = e.target;
     const firstName = form.firstName.value;
@@ -34,21 +37,52 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        setLoading(false);
+        const currentUser = {
+          email: user.email,
+        };
+        jwtToken(currentUser);
+
         form.reset();
         if (user?.uid) {
           toast.success("Account Created Successfully.");
         }
         updateUsersProfile(profile)
           .then(() => {
+            setLoading(false);
             toast.success("Profile Updated.");
+
             navigate(from, { replace: true });
           })
-          .catch((error) => console.error(error));
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            setLoading(false);
+            toast.error(errorMessage);
+          });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setLoading(false);
+        toast.error(errorMessage);
+      });
   };
   return (
     <div>
+      {loading && (
+        <div className="flex justify-center items-center h-[100vh]">
+          <Vortex
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="vortex-loading"
+            wrapperStyle={{}}
+            wrapperClass="vortex-wrapper"
+            colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+          />
+        </div>
+      )}
       <section className=" dark:bg-gray-900 w-[85%] mx-auto">
         <div className="flex justify-center min-h-screen my-10 bg-white">
           <div className=" lg:w-3/5 rounded-lg">
@@ -58,18 +92,15 @@ const SignUp = () => {
               alt=""
             />
           </div>
-
           <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:w-[70%]">
             <div className="w-full">
               <h1 className="text-4xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
                 Get your free account now.
               </h1>
-
               <p className="mt-4 text-gray-500 dark:text-gray-400">
                 Let's get you all set up so you can verify your personal account
                 and begin setting up your profile.
               </p>
-
               <form
                 onSubmit={handleSignUpUser}
                 className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2"

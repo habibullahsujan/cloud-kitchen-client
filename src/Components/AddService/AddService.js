@@ -12,7 +12,7 @@ const AddService = () => {
     const servicePrice = form.price.value;
     const description = form.description.value;
     const servicePicture = form.picture.value;
-    const serviceNo = form.id.value;
+    const serviceNo = parseInt(form.id.value);
 
     const newService = {
       serviceNo: serviceNo,
@@ -22,7 +22,7 @@ const AddService = () => {
       about: description,
     };
 
-    fetch("http://localhost:5000/addReview", {
+    fetch("https://cloud-kitchen-server-puce.vercel.app/addService", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -107,7 +107,7 @@ const AddService = () => {
             type="submit"
             className=" text-white px-8 py-3 font-semibold rounded border border-sky-700 w-full transition ease-in-out delay-150 bg-sky-700 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
           >
-            Add Review
+            Add Service
           </button>
         </div>
       </form>

@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AddService from "../Components/AddService/AddService";
 import AllServices from "../Components/AllSevices/AllServices";
 import Blog from "../Components/Blog/Blog";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login";
 import AddReview from "../Components/Reviews/AddReview";
@@ -17,24 +18,28 @@ export const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: () => fetch("http://localhost:5000/services"),
+        loader: () =>
+          fetch("https://cloud-kitchen-server-puce.vercel.app/services"),
       },
       { path: "/login", element: <Login /> },
       { path: "/signUp", element: <SignUp /> },
       {
         path: "allServices",
         element: <AllServices />,
-        loader: () => fetch("http://localhost:5000/allServices"),
+      
       },
       {
         path: "/serviceDetails/:id",
         element: <Details />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/serviceDetails/${params.id}`),
+          fetch(
+            `https://cloud-kitchen-server-puce.vercel.app/serviceDetails/${params.id}`
+          ),
       },
 
       {
@@ -57,7 +62,9 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/service/${params.id}`),
+          fetch(
+            `https://cloud-kitchen-server-puce.vercel.app/service/${params.id}`
+          ),
       },
       {
         path: "/editReview/:id",
@@ -67,16 +74,16 @@ export const routes = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/review/${params.id}`),
+          fetch(
+            `https://cloud-kitchen-server-puce.vercel.app/review/${params.id}`
+          ),
       },
       {
         path: "/AddService",
         element: (
-         
           <PrivateRoute>
-             <AddService />
+            <AddService />
           </PrivateRoute>
-          
         ),
       },
       {

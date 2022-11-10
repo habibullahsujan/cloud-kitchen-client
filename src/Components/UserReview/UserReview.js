@@ -10,27 +10,35 @@ const UserReview = () => {
   useTitle("User Review");
   const { user, logOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/userReview?email=${user?.email}`, {
+    setLoading(true);
+    fetch(`https://cloud-kitchen-server-puce.vercel.app/userReview?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
     })
       .then((res) => {
-        console.log(res);
-        return res.json()
+        if (res.status === 401 || res.status === 403) {
+          return logOut();
+        }
+        return res.json();
       })
       .then((data) => {
+
+        
         setReviews(data);
+        setLoading(false);
       });
-  }, [user?.email]);
+      
+  }, [user?.email, logOut]);
 
   const handleDeleteReview = (id) => {
     const confirmation = window.confirm("Are you sure delete this review.");
 
     if (confirmation) {
-      fetch(`http://localhost:5000/deleteReview/${id}`, {
+      fetch(`https://cloud-kitchen-server-puce.vercel.app/deleteReview/${id}`, {
         method: "DELETE",
       })
         .then((res) => {
@@ -47,77 +55,84 @@ const UserReview = () => {
     }
   };
 
-  if (!reviews) {
-    <div className="flex justify-center items-center h-[100vh]">
-      <Vortex
-        visible={true}
-        height="80"
-        width="80"
-        ariaLabel="vortex-loading"
-        wrapperStyle={{}}
-        wrapperClass="vortex-wrapper"
-        colors={["red", "green", "blue", "yellow", "orange", "purple"]}
-      />
-    </div>;
-  }
   return (
     <div>
-      {reviews?.length ? (
-        <div className="container p-2 mx-auto sm:p-4 my-10">
-          <h2 className="mb-4 text-2xl font-semibold leading-tight">
-            Your All Time Review
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left whitespace-nowrap">
-              <thead>
-                <tr className="bg-gray-700 border-sky-700 border-b-4">
-                  <th className="p-3">Name</th>
-                  <th className="p-3">Email</th>
-                  <th className="p-3">Comment</th>
-                  <th className="p-3">Service Name</th>
-                  <th className="p-3">Date</th>
-                  <th className="p-3">Action</th>
-                  <th className="p-3">Action</th>
-                </tr>
-              </thead>
-              {reviews.map((review) => (
-                <tbody className="bg-gray-900 border-sky-500 border-b-2">
-                  <td className="p-3">{review?.userName}</td>
-                  <td className="p-3">{review?.userEmail}</td>
-                  <td className="p-3">{review?.userReview}</td>
-                  <td className="p-3">{review?.serviceName}</td>
-                  <td>
-                    {review?.reviewTime?.date} - {review?.reviewTime?.month} -{" "}
-                    {review?.reviewTime?.year}
-                  </td>
-                  <td className="p-3">
-                    <Link
-                      to={`/editReview/${review?._id}`}
-                      className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1"
-                    >
-                      Edit
-                    </Link>
-                  </td>
-                  <td className="p-3">
-                    <button
-                      onClick={() => handleDeleteReview(review?._id)}
-                      className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tbody>
-              ))}
-            </table>
-          </div>
-        </div>
-      ) : (
-        <div className="h-[100vh] flex justify-center items-center">
-          <h3 className="font-bold text-4xl text-center text-white">
-            You have zero reviews.
-          </h3>
+      {loading && (
+        <div className="flex justify-center items-center h-[100vh]">
+          <Vortex
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="vortex-loading"
+            wrapperStyle={{}}
+            wrapperClass="vortex-wrapper"
+            colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+          />
         </div>
       )}
+      <div>
+        {reviews?.length > 0 ? (
+          <div className="container p-2 mx-auto sm:p-4 my-10">
+            <h2 className="mb-4 text-2xl font-semibold leading-tight">
+              Your All Time Review
+            </h2>
+            <div className="overflow-x-auto">
+              <table className=" text-sm text-left mx-auto table-auto">
+                <thead>
+                  <tr className="bg-gray-700 border-sky-700 border-b-4">
+                    <th className="p-3">Name</th>
+                    <th className="p-3">Email</th>
+                    <th className="p-3">Comment</th>
+                    <th className="p-3">Service Name</th>
+                    <th className="p-3">Date</th>
+                    <th className="p-3">Action</th>
+                    <th className="p-3">Action</th>
+                  </tr>
+                </thead>
+                {reviews.map((review) => (
+                  <tbody className="bg-gray-900 border-sky-500 border-b-2">
+                    <td className="p-3">{review?.userName}</td>
+                    <td className="p-3">{review?.userEmail}</td>
+                    <td className="p-3">
+                      {review?.userReview.length > 30
+                        ? review.userReview.slice(0, 20)
+                        : review.userReview}
+                        <span>....</span>
+                    </td>
+                    <td className="p-3">{review?.serviceName}</td>
+                    <td>
+                      {review?.reviewTime?.date} - {review?.reviewTime?.month} -{" "}
+                      {review?.reviewTime?.year}
+                    </td>
+                    <td className="p-3">
+                      <Link
+                        to={`/editReview/${review?._id}`}
+                        className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1"
+                      >
+                        Edit
+                      </Link>
+                    </td>
+                    <td className="p-3">
+                      <button
+                        onClick={() => handleDeleteReview(review?._id)}
+                        className="border border-sky-600 px-2 bg-sky-800 rounded-lg py-1"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tbody>
+                ))}
+              </table>
+            </div>
+          </div>
+        ) : (
+          <div className="h-[100vh] flex justify-center items-center">
+            <h3 className="font-bold text-4xl text-center text-white">
+              You have zero reviews.
+            </h3>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

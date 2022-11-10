@@ -49,12 +49,12 @@ const UserContext = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoader(false)
+      setLoader(false);
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [createUserWithEmail]);
 
   const authInfo = {
     createUserWithEmail,

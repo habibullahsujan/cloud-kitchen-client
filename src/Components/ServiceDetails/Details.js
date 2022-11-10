@@ -1,24 +1,24 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link, useLoaderData } from "react-router-dom";
 import "react-photo-view/dist/react-photo-view.css";
 import Review from "../Reviews/Review";
 import { AuthContext } from "../../Context/UserContext";
 import useTitle from "../../Hooks/useTitle";
+import { FaStar } from "react-icons/fa";
 
 const Details = () => {
-
-  useTitle('Service Details')
+  useTitle("Service Details");
   const serviceDetails = useLoaderData();
-  const { user, setService,  } = useContext(AuthContext);
-  
+  const { user, setService } = useContext(AuthContext);
 
   const reviews = serviceDetails.reviews;
 
-  const handleSetServiceId=()=>{
-    setService(serviceDetails.serviceNo)
+  const handleSetServiceId = () => {
+    setService(serviceDetails.serviceNo);
+  };
 
-  }
+  console.log(serviceDetails.menus);
   return (
     <div>
       <div className="flex justify-center my-16">
@@ -39,11 +39,25 @@ const Details = () => {
             <h4 className="text-xl text-gray-700 dark:text-gray-200 font-bold">
               {serviceDetails?.price}
             </h4>
-            <h5>
-              <span className="font-semibold text-lg">Ratings:</span>
-              {serviceDetails?.ratings}
-            </h5>
+            <div className="flex items-center gap-2">
+              {[...Array(serviceDetails?.ratings).keys()].map((rating) => (
+                <span key={rating} className="text-orange-500">
+                  <FaStar />
+                </span>
+              ))}
+
+              <span className="font-bold text-orange-600 text-lg">{serviceDetails?.ratings}</span>
+            </div>
+            <ul>
+              <h3 className="font-bold text-lg">Our Menus:</h3>
+              {serviceDetails.menus.map((menu) => (
+                <li key={menu.id} className="list-disc p-1 font-semibold">
+                  {menu.name}
+                </li>
+              ))}
+            </ul>
             <p className="text-sm dark:text-gray-400">
+              <span className="font-bold text-2xl">Description:</span>
               {serviceDetails?.about}
             </p>
           </div>
@@ -112,7 +126,7 @@ const Details = () => {
         </div>
       </div>
       <div className="flex justify-end">
-        {user? (
+        {user ? (
           <Link
             to={`/addReview/${serviceDetails.serviceNo}`}
             onClick={handleSetServiceId}

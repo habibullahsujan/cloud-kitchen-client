@@ -1,6 +1,7 @@
 import React from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
 
 const Services = ({ service }) => {
   return (
@@ -24,12 +25,21 @@ const Services = ({ service }) => {
           <h4 className="text-xl text-gray-700 dark:text-gray-200 font-bold">
             {service?.price}
           </h4>
-          <span>Ratings:{service?.ratings}</span>
+          <div className="flex items-center gap-2">
+            {[...Array(service?.ratings).keys()].map((rating) => (
+              <span key={rating} className="text-orange-500">
+                <FaStar />
+              </span>
+            ))}
+
+            <span>Ratings:{service?.ratings}</span>
+          </div>
+
           <p>
             <span className="font-semibold">Description:</span>
             {service?.about.length > 100
               ? service?.about.slice(0, 100)
-              : ""}{" "}
+              : service?.about}
             .....
           </p>
           <div className="my-4">

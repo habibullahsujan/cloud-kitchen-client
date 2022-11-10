@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
 import useTitle from "../../Hooks/useTitle";
@@ -37,7 +37,7 @@ const AddReview = () => {
       reviewTime: fullTime,
 
     };
-    fetch("http://localhost:5000/addReview", {
+    fetch("https://cloud-kitchen-server-puce.vercel.app/addReview", {
       method: "POST",
       headers: {
         "content-type": "application/json",

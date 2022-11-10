@@ -25,7 +25,7 @@ const EditReview = () => {
       comment: updatedComment,
       updatedRating: rating,
     };
-    fetch(`http://localhost:5000/editReview/${review._id}`, {
+    fetch(`https://cloud-kitchen-server-puce.vercel.app/editReview/${review._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
