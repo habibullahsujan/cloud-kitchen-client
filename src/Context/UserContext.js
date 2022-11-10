@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -54,7 +54,7 @@ const UserContext = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [createUserWithEmail]);
+  }, []);
 
   const authInfo = {
     createUserWithEmail,
