@@ -4,16 +4,16 @@ import { toast } from "react-toastify";
 import { AuthContext } from "../../Context/UserContext";
 import useTitle from "../../Hooks/useTitle";
 
-import { Vortex } from "react-loader-spinner";
+
 
 const UserReview = () => {
   useTitle("User Review");
   const { user, logOut } = useContext(AuthContext);
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
-    setLoading(true);
+ 
     fetch(`https://cloud-kitchen-server-puce.vercel.app/userReview?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -26,10 +26,8 @@ const UserReview = () => {
         return res.json();
       })
       .then((data) => {
-
-        
         setReviews(data);
-        setLoading(false);
+      
       });
       
   }, [user?.email, logOut]);
@@ -57,19 +55,6 @@ const UserReview = () => {
 
   return (
     <div>
-      {loading && (
-        <div className="flex justify-center items-center h-[100vh]">
-          <Vortex
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="vortex-loading"
-            wrapperStyle={{}}
-            wrapperClass="vortex-wrapper"
-            colors={["red", "green", "blue", "yellow", "orange", "purple"]}
-          />
-        </div>
-      )}
       <div>
         {reviews?.length > 0 ? (
           <div className="container p-2 mx-auto sm:p-4 my-10">

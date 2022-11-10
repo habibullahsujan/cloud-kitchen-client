@@ -37,32 +37,32 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
-        setLoading(false);
+    
         const currentUser = {
           email: user.email,
         };
         jwtToken(currentUser);
-
+        setLoading(false);
         form.reset();
         if (user?.uid) {
           toast.success("Account Created Successfully.");
         }
         updateUsersProfile(profile)
           .then(() => {
-            setLoading(false);
+            
             toast.success("Profile Updated.");
 
             navigate(from, { replace: true });
           })
           .catch((error) => {
-            const errorCode = error.code;
+         
             const errorMessage = error.message;
-            setLoading(false);
+            
             toast.error(errorMessage);
           });
       })
       .catch((error) => {
-        const errorCode = error.code;
+   
         const errorMessage = error.message;
         setLoading(false);
         toast.error(errorMessage);
@@ -83,8 +83,8 @@ const SignUp = () => {
           />
         </div>
       )}
-      <section className=" dark:bg-gray-900 w-[85%] mx-auto">
-        <div className="flex justify-center min-h-screen my-10 bg-white">
+      <section className=" w-[85%] mx-auto">
+        <div className="lg:flex block justify-center min-h-screen my-10 bg-white">
           <div className=" lg:w-3/5 rounded-lg">
             <img
               className="h-[500px] p-8 rounded-lg"

@@ -54,6 +54,8 @@ const Login = () => {
           email:user.email
         }
         jwtToken(currentUser);
+        navigate(from, { replace: true });
+        toast.success("Login Success");
       })
       .catch((error) => {
         toast.error(error);

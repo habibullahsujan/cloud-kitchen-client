@@ -7,7 +7,6 @@ const PrivateRoute = ({ children }) => {
   const { user, loader } = useContext(AuthContext);
   const location = useLocation();
 
-
   if (loader) {
     return (
       <div className="flex justify-center items-center h-[100vh]">
