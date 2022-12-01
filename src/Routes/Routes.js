@@ -5,6 +5,7 @@ import Blog from "../Components/Blog/Blog";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import Home from "../Components/Home/Home";
 import Login from "../Components/Login";
+import Payment from "../Components/Payment/Payment";
 import AddReview from "../Components/Reviews/AddReview";
 import SingleReview from "../Components/Reviews/SingleReview";
 import Details from "../Components/ServiceDetails/Details";
@@ -24,7 +25,7 @@ export const routes = createBrowserRouter([
         path: "/",
         element: <Home />,
         loader: () =>
-          fetch("https://cloud-kitchen-server-puce.vercel.app/services"),
+          fetch("http://localhost:5000/services"),
       },
       { path: "/login", element: <Login /> },
       { path: "/signUp", element: <SignUp /> },
@@ -38,7 +39,7 @@ export const routes = createBrowserRouter([
         element: <Details />,
         loader: ({ params }) =>
           fetch(
-            `https://cloud-kitchen-server-puce.vercel.app/serviceDetails/${params.id}`
+            `http://localhost:5000/serviceDetails/${params.id}`
           ),
       },
 
@@ -63,7 +64,7 @@ export const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://cloud-kitchen-server-puce.vercel.app/service/${params.id}`
+            `http://localhost:5000/service/${params.id}`
           ),
       },
       {
@@ -75,7 +76,7 @@ export const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://cloud-kitchen-server-puce.vercel.app/review/${params.id}`
+            `http://localhost:5000/review/${params.id}`
           ),
       },
       {
@@ -84,6 +85,18 @@ export const routes = createBrowserRouter([
           <PrivateRoute>
             <AddService />
           </PrivateRoute>
+        ),
+      },
+      {
+        path: "/payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment/>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+        fetch(
+          `http://localhost:5000/service_details/${params.id}`
         ),
       },
       {

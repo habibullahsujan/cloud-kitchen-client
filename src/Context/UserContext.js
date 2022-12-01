@@ -66,6 +66,7 @@ const UserContext = ({ children }) => {
     loader,
     service,
     setService,
+    setLoader,
 
   };
 

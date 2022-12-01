@@ -8,7 +8,7 @@ import { jwtToken } from "../Utilities/jwtToken";
 
 const SignUp = () => {
   useTitle("Sign Up");
-  const { createUserWithEmail, updateUsersProfile } = useContext(AuthContext);
+  const { createUserWithEmail, updateUsersProfile, setLoader } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -36,7 +36,6 @@ const SignUp = () => {
     createUserWithEmail(email, confirmPassword)
       .then((result) => {
         const user = result.user;
-        console.log(user);
     
         const currentUser = {
           email: user.email,
@@ -51,6 +50,7 @@ const SignUp = () => {
           .then(() => {
             
             toast.success("Profile Updated.");
+            setLoader(false)
 
             navigate(from, { replace: true });
           })

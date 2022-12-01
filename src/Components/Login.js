@@ -8,13 +8,13 @@ import { Vortex } from "react-loader-spinner";
 
 const Login = () => {
   useTitle("Login");
-  const { signInUser, signInUsingGoogle } = useContext(AuthContext);
+  const { signInUser, signInUsingGoogle,setLoader } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
   const from = location.state?.from?.pathname || "/";
-  // console.log(from);
+
 
   const handleLogin = (e) => {
     setLoading(true);
@@ -49,18 +49,19 @@ const Login = () => {
     signInUsingGoogle()
       .then((result) => {
         const user = result.user;
-        console.log(user);
+   
         const currentUser={
           email:user.email
         }
         jwtToken(currentUser);
+        setLoader(false)
         navigate(from, { replace: true });
         toast.success("Login Success");
       })
       .catch((error) => {
         toast.error(error);
         navigate(from, { replace: true });
-        console.error(error);
+  
       });
   };
   return (

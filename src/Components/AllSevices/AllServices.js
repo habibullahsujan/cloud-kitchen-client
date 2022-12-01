@@ -19,7 +19,7 @@ const AllServices = () => {
   useEffect(() => {
     setLoading(true)
     fetch(
-      `https://cloud-kitchen-server-puce.vercel.app/allServices?size=${perPageItemShow}&page=${currentPage}`
+      `http://localhost:5000/allServices?size=${perPageItemShow}&page=${currentPage}`
     )
       .then((res) => res.json())
       .then((data) => {

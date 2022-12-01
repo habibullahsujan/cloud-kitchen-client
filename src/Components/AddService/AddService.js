@@ -22,7 +22,7 @@ const AddService = () => {
       about: description,
     };
 
-    fetch("https://cloud-kitchen-server-puce.vercel.app/addService", {
+    fetch("http://localhost:5000/addService", {
       method: "POST",
       headers: {
         "content-type": "application/json",
