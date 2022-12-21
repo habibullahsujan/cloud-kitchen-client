@@ -4,7 +4,7 @@ export const jwtToken = (user) => {
     const userEmail = {
       email: user.email,
     };
-    fetch("http://localhost:5000/jwt", {
+    fetch(" https://cloud-kitchen-server-puce.vercel.app/jwt", {
       method: "POST",
       headers: {
         "content-type": "application/json",

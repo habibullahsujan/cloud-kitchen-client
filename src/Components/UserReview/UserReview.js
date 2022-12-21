@@ -14,7 +14,7 @@ const UserReview = () => {
 
   useEffect(() => {
  
-    fetch(`http://localhost:5000/userReview?email=${user?.email}`, {
+    fetch(` https://cloud-kitchen-server-puce.vercel.app/userReview?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
@@ -36,7 +36,7 @@ const UserReview = () => {
     const confirmation = window.confirm("Are you sure delete this review.");
 
     if (confirmation) {
-      fetch(`http://localhost:5000/deleteReview/${id}`, {
+      fetch(` https://cloud-kitchen-server-puce.vercel.app/deleteReview/${id}`, {
         method: "DELETE",
       })
         .then((res) => {

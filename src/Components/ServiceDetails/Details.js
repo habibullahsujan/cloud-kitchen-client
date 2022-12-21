@@ -42,7 +42,7 @@ const Details = () => {
       productId: serviceDetails?._id,
       paymentStatus: "pending",
     };
-    fetch("http://localhost:5000/orders", {
+    fetch(" https://cloud-kitchen-server-puce.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -37,7 +37,7 @@ export const routes = createBrowserRouter([
         element: <Details />,
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/serviceDetails/${params.id}`
+            ` https://cloud-kitchen-server-puce.vercel.app/serviceDetails/${params.id}`
           ),
       },
 
@@ -62,7 +62,7 @@ export const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/service/${params.id}`
+            ` https://cloud-kitchen-server-puce.vercel.app/service/${params.id}`
           ),
       },
       {
@@ -74,7 +74,7 @@ export const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `http://localhost:5000/review/${params.id}`
+            ` https://cloud-kitchen-server-puce.vercel.app/review/${params.id}`
           ),
       },
       {
@@ -94,7 +94,7 @@ export const routes = createBrowserRouter([
         ),
         loader: ({ params }) =>
         fetch(
-          `http://localhost:5000/service_details/${params.id}`
+          ` https://cloud-kitchen-server-puce.vercel.app/service_details/${params.id}`
         ),
       },
       {

@@ -37,7 +37,7 @@ const AddReview = () => {
       reviewTime: fullTime,
 
     };
-    fetch("http://localhost:5000/addReview", {
+    fetch(" https://cloud-kitchen-server-puce.vercel.app/addReview", {
       method: "POST",
       headers: {
         "content-type": "application/json",

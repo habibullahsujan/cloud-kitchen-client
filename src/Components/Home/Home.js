@@ -19,7 +19,7 @@ const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/services")
+    fetch(" https://cloud-kitchen-server-puce.vercel.app/services")
       .then((res) => res.json())
       .then((data) => {
         setServices(data);

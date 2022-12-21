@@ -3,7 +3,7 @@ import { async } from "@firebase/util";
 //save user data in the database
 export const saveUserData = async (userInfo) => {
   if (userInfo) {
-    const url = "http://localhost:5000/signupUser";
+    const url = " https://cloud-kitchen-server-puce.vercel.app/signupUser";
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -18,7 +18,7 @@ export const saveUserData = async (userInfo) => {
 
 export const getUserInfo=async(email)=>{
     if(email){
-        const url=`http://localhost:5000/signupUser?email=${email}`;
+        const url=` https://cloud-kitchen-server-puce.vercel.app/signupUser?email=${email}`;
         const res= await fetch(url);
         const data=await res.json();
         return data;
@@ -27,7 +27,7 @@ export const getUserInfo=async(email)=>{
 //update user liked status
 export const updateLikedStatus=async(email, productInfo)=>{
   if(email){
-    const url=`http://localhost:5000/signupUser?email=${email}`;
+    const url=` https://cloud-kitchen-server-puce.vercel.app/signupUser?email=${email}`;
     const res= await fetch(url, {
       method:'PUT',
       headers:{
