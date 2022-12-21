@@ -2,13 +2,15 @@ import React, { useContext, useState } from "react";
 import { Vortex } from "react-loader-spinner";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { saveUserData } from "../Apis/user";
 import { AuthContext } from "../Context/UserContext";
 import useTitle from "../Hooks/useTitle";
 import { jwtToken } from "../Utilities/jwtToken";
 
 const SignUp = () => {
   useTitle("Sign Up");
-  const { createUserWithEmail, updateUsersProfile, setLoader } = useContext(AuthContext);
+  const { createUserWithEmail, updateUsersProfile, setLoader } =
+    useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
@@ -36,7 +38,16 @@ const SignUp = () => {
     createUserWithEmail(email, confirmPassword)
       .then((result) => {
         const user = result.user;
-    
+        const userInfo = {
+          user_name: user?.displayName,
+          user_email: user?.email,
+          user_img: photoUrl,
+          account_created_date: new Date(),
+        };
+        saveUserData(userInfo)
+          .then((data) => console.log(data))
+          .catch((err) => console.error(err.message));
+
         const currentUser = {
           email: user.email,
         };
@@ -48,21 +59,18 @@ const SignUp = () => {
         }
         updateUsersProfile(profile)
           .then(() => {
-            
             toast.success("Profile Updated.");
-            setLoader(false)
+            setLoader(false);
 
             navigate(from, { replace: true });
           })
           .catch((error) => {
-         
             const errorMessage = error.message;
-            
+
             toast.error(errorMessage);
           });
       })
       .catch((error) => {
-   
         const errorMessage = error.message;
         setLoading(false);
         toast.error(errorMessage);
@@ -140,7 +148,6 @@ const SignUp = () => {
                     className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
-
                 <div>
                   <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Email Address
@@ -152,7 +159,6 @@ const SignUp = () => {
                     className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
-
                 <div>
                   <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Password
@@ -164,7 +170,6 @@ const SignUp = () => {
                     className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
-
                 <div>
                   <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">
                     Confirm password
@@ -176,7 +181,6 @@ const SignUp = () => {
                     className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
-
                 <button
                   type="submit"
                   className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"

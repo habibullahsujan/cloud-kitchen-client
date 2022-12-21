@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 text--white">
-      <div className="relative flex items-center justify-between">
+      <div className="relative flex items-center justify-between text-white">
         <Link to={"/"} title="Our Cloud Kitchen" className="inline-flex items-center">
           <span className="ml-2 text-xl font-bold tracking-wide uppercase">
             Jannat's Kitchen
@@ -28,14 +28,68 @@ const Header = () => {
         <ul className=" items-center hidden space-x-8 lg:flex">
           <li>
             <Link
+              to={"/"}
+              
+              className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/"}
+           
+              className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Menus
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/"}
+          
+              className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              About
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/"}
+            
+              className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Shop
+            </Link>
+          </li>
+          <li>
+            <Link
               to={"/blog"}
-              aria-label="Blog"
-              title="Blog"
+           
               className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
             >
               Blog
             </Link>
           </li>
+          <li>
+            <Link
+              to={"/"}
+        
+              className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Page
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/"}
+      
+              className="font-medium tracking-wide transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              Contact
+            </Link>
+          </li>
+       
           {user?.uid ? (
             <>
               <li>
